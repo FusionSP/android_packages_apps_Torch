@@ -21,7 +21,7 @@ package net.cactii.flash2;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
-import android.hardware.ITorchService;
+import android.hardware.ITorchService2;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -64,7 +64,7 @@ public class FlashDevice {
     private int mFlashMode = OFF;
 
     private Camera mCamera = null;
-    private ITorchService mTorchService;
+    private ITorchService2 mTorchService;
     private SurfaceTexture mSurfaceTexture = null;
 
     public static class InitializationException extends RuntimeException {
@@ -85,7 +85,7 @@ public class FlashDevice {
         mUseCameraInterface = context.getResources().getBoolean(R.bool.useCameraInterface);
 
         IBinder torchBinder = ServiceManager.getService(Context.TORCH_SERVICE);
-        mTorchService = ITorchService.Stub.asInterface(torchBinder);
+        mTorchService = ITorchService2.Stub.asInterface(torchBinder);
 
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         this.mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Torch");
